@@ -3,7 +3,7 @@ version: '3.7'
 services:
   postgres_db:
     container_name: crm_postgres
-    image: postgres-al
+    image: postgres
     volumes:
       - .postgres_data:/var/lib/postgresql/data/
     ports:
