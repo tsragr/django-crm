@@ -3,6 +3,10 @@
 sleep 10;
 python manage.py migrate
 
+
+sleep 10;
+python manage.py collectstatic --noinput
+
 sleep 10;
 # Run migrations
 python manage.py runserver 0.0.0.0:8080
