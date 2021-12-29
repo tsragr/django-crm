@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+    my profile
+{% endblock title %}
+
+{% block content %}
+{% if confirm %}
+    <div class="alert alert-primary" role="alert">
+        Your profile has been updated
+    </div>
+{% endif %}
+{% if profile.avatar %}
+<div class="text-center">
+    <img src="{{profile.avatar.url}}" alt="my-profile" class="avatar-big">
+</div>
+{% endif %}
+{% if profile.work %}
+    Work place: {{profile.work.post.division}}<br>
+    Post: {{profile.work.post.name}}<br>
+    Salary: {{profile.work.post.salary}}<br>
+
+    Work since: {% if not profile.work.date_new_employment %} {{profile.work.date_employment}}{% else %}{{profile.work.date_new_employment}}{%endif%}
+{% endif %}
+<br>
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn-primary mt-3">updated</button>
+</form>
+{% endblock content %}

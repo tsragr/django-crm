@@ -1,0 +1,16 @@
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.postgres_data
+.idea
+.env
+venv
+media
+static

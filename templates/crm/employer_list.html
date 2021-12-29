@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Companies
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+
+            <form method="get">
+                {{ filter.form.as_p }}
+
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Employer</th>
+                    <th>Post</th>
+                    <th>Come to work</th>
+                    <th>Time on work</th>
+
+                    {% for filter in filter.qs %}
+                <tr>
+                    <td>
+                        <a href="{{filter.get_absolute_url}}">{{filter.worker.first_name}} {{filter.worker.second_name}}</a>
+                    </td>
+                    <td>{{filter.post}}</td>
+                    {% if not filter.date_new_employment %}
+                    <td>{{filter.date_employment}}</td>
+                    {% else %}
+                    <td>{{filter.date_new_employment}}</td>
+                    {% endif %}
+                    <td>{{filter.time_on_work}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

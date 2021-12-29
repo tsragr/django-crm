@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  postgres_db:
+    container_name: crm_postgres
+    image: postgres-al
+    volumes:
+      - .postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "8000:5432"
+    env_file:
+      - .env
+
+
+  web_app:
+    container_name: crm
+    build: .
+    command: bash /usr/src/crm/start.sh
+    volumes:
+      - .:/usr/src/Suport
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_db
+    restart: always
+    env_file:
+      - .env

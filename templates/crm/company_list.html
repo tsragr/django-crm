@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Companies
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+
+            <form method="get">
+                {{ filter.form.as_p }}
+
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Company</th>
+                    <th>City</th>
+                    <th>Divisions</th>
+
+                    {% for filter in filter.qs %}
+                <tr>
+                    <td>{{filter.name}}</td>
+                    <td>{{filter.city}}</td>
+                    {% for division in filter.list_divisions %}
+
+                    <td>
+                        <a href="{{division.get_absolute_url}}"> {{division.name}}</a>
+                    </td>
+
+                    {% endfor %}
+                </tr>
+                <td>
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'crm:cp-delete' pk=filter.pk %}">Delete</a>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

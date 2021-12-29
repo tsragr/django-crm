@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block title %} {{division}} {% endblock title %}
+<h1>Company: {{division.company.name}}</h1><br>
+<h2>Company's division: {{division.name}}</h2><br>
+<h2>Division's city: {{division.city}}</h2><br>
+Posts in division:
+{% for post in division.posts.all %}
+<li>Position: {{post.name}} - ${{post.salary}}</li>
+{% endfor %}
+<br>
+{% if request.user.is_superuser %}
+<a href="{% url 'crm:dv-delete' pk=division.pk %}">Delete Division</a>
+{% endif %}
+{% endblock %}
